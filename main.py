@@ -85,6 +85,20 @@ class Mentor:
         else:
             return 'Ошибка'
 
+    def calculate_average_homework_grade(students, course):
+        total_grades = 0
+        total_students = 0
+        for student in students:
+            if course in student.courses_in_progress:
+                grades = student.grades.get(course, [])
+                if grades:
+                    total_grades += sum(grades)
+                    total_students += len(grades)
+        if total_students > 0:
+            return total_grades / total_students
+        else:
+            return 0
+
 
 class Lecturer(Mentor):
     def __init__(self, name, surname):
@@ -141,6 +155,21 @@ elif lecturer1 > lecturer2:
     print("Lecturer 1 has a higher average lecture grade than Lecturer 2")
 else:
     print("Lecturer 1 and Lecturer 2 have the same average lecture grade")
+
+
+    def calculate_average_lecture_grade(lecturers, course):
+        total_grades = 0
+        total_lecturers = 0
+        for lecturer in lecturers:
+            if course in lecturer.courses_taught:
+                grades = lecturer.grades.get(course, [])
+                if grades:
+                    total_grades += sum(grades)
+                    total_lecturers += len(grades)
+        if total_lecturers > 0:
+            return total_grades / total_lecturers
+        else:
+            return 0
 
 
 
